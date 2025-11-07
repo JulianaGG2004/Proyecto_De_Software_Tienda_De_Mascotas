@@ -28,8 +28,9 @@ app.get("/",(request,response)=>{
         message : "Servidor esta corriendo " + PORT
     })
 })
-connectDB()
-
-app.listen(PORT,()=>{
-    console.log("Server is running", PORT)
+connectDB().then(()=>{
+    app.listen(PORT,()=>{
+        console.log("Server is running", PORT)
+    })
 })
+
