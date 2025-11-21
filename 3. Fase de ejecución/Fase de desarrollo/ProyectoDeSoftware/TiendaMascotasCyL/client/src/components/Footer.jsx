@@ -9,14 +9,14 @@ const Footer = () => {
     <footer className='border-t'>
         <div className='container mx-auto p-4 text-center flex flex-col lg:flex-row lg:justify-between gap-2'>
             <p>© Derechos reservados por Tienda de mascotas Coco y Luna</p>
-            <div className='flex items-center gap-4 justify-center text-2x1'>
-                <a href='' className="hover:text-primary-100">
+            <div className='flex items-center gap-4 justify-center text-2xl'>
+                <a href='' className="hover:text-primary-500">
                     <FaFacebook/>
                 </a>
-                <a href='' className="hover:text-primary-100">
+                <a href='' className="hover:text-primary-500">
                     <FaInstagram/>
                 </a>
-                <a href='' className="hover:text-primary-100">
+                <a href='' className="hover:text-primary-500">
                     <FaLinkedin/>
                 </a>
             </div>
