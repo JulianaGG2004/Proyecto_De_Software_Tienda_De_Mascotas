@@ -1,19 +1,15 @@
 import React, { useState } from 'react'
 import {Link, useNavigate} from 'react-router-dom'
-import { FaRegEyeSlash } from "react-icons/fa6";
-import { FaRegEye } from "react-icons/fa6";
 import toast from 'react-hot-toast';
 import Axios from '../utils/Axios';
 import SummaryApi from '../common/SummaryApi';
 import AxiosToastError from '../utils/AxiosToastError';
 
-const Login = () => {
+const ForgotPassword = () => {
     const [data, setData] = useState({
-        email : "",
-        password : ""
+        email : ""
     })
     
-    const [showPassword, setShowPassword] = useState(false)
     const navigate = useNavigate()
 
     const handleChange = (e)=>{
@@ -34,7 +30,7 @@ const Login = () => {
 
         try {
             const response = await Axios({
-                ...SummaryApi.login,
+                ...SummaryApi.forgot_password,
                 data : data
 
             })
@@ -45,11 +41,13 @@ const Login = () => {
 
             if(response.data.success){
                 toast.success(response.data.message)
-                setData({
-                    email : "",
-                    password : "",
+                navigate("/verification-otp",{
+                    state : data
                 })
-                navigate("/")
+                setData({
+                    email : ""
+                })
+                
             }
         } catch (error) {
             AxiosToastError(error)
@@ -59,7 +57,7 @@ const Login = () => {
   return (
     <section className='w-full container mx-auto px-2'>
         <div className='bg-white my-4 w-full max-w-lg mx-auto rounded p-7'>
-            <p className='font-semibold text-lg text-center'>Iniciar Sesión</p>
+            <p className='font-semibold text-lg text-center'>Recuperación de contraseña</p>
             <form className='grid gap-4 py-4' onSubmit={handleSubmit}>
                 <div className='grid gap-1'>
                     <label htmlFor="email">Correo Electronico:</label>
@@ -73,37 +71,13 @@ const Login = () => {
                         placeholder='Ingresa tu correo electronico'
                     />
                 </div>
-                <div className='grid gap-1'>
-                    <label htmlFor="password">Contraseña:</label>
-                    <div className='bg-slate-100 p-2 border rounded flex items-center focus-within:border-primary-400'>
-                        <input 
-                            type={showPassword ? "text" : "password"}
-                            id='password'
-                            className='w-full outline-none'
-                            name='password'
-                            value={data.password} 
-                            onChange={handleChange}
-                            placeholder='Ingresa tu contraseña'
-                        />
-                        <div onClick={()=> setShowPassword(preve => !preve)} className='cursor'>
-                            {
-                                showPassword ? (
-                                    <FaRegEye/>      
-                                ) : (
-                                    <FaRegEyeSlash/>
-                                )
-                            }
-                        </div>
-                    </div>
-                    <Link to={"/forgot-password"} className='block ml-auto hover:text-primary-300'>Olvidaste tu contraseña?</Link>
-                </div>
 
                 <button  disabled={!valideValue} className={` ${valideValue ? "bg-primary-300 hover:bg-primary-500" : "bg-gray-500" }  text-white py-3 rounded-full 
-                font-semibold my-3 tracking-wide`}>Iniciar Sesión</button>
+                font-semibold my-3 tracking-wide`}>Enviar OTP</button>
             </form>
             <p>
-                Aun no tienes una cuenta? <Link to={"/register"} 
-                className='font-semibold text-primary-400 hover:text-primary-500'>Registrarse</Link>
+               Ya tienes una cuenta? <Link to={"/login"} 
+                className='font-semibold text-primary-400 hover:text-primary-500'>Iniciar Sesión</Link>
             </p>
         </div>
       
@@ -111,4 +85,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default ForgotPassword
