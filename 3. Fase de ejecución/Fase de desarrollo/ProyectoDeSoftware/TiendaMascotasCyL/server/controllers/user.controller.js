@@ -146,6 +146,10 @@ export async function loginController(request, response){
         const accesstoken = await generatedAccessToken(user._id)
         const refreshToken = await generatedRefreshToken(user._id)
 
+        const updateUser = await UserModel.findByIdAndUpdate(user?._id,{
+            last_login_date : new Date()
+        })
+
         const cookiesOption = {
             httpOnly : true,
             secure : true,
@@ -223,6 +227,8 @@ export async function uploadAvatar(request,response) {
 
         return response.json({
             message : "Subir Perfil",
+            success : true,
+            error : false,
             data : {
                 _id : userId,
                 avatar : upload.url
@@ -447,7 +453,7 @@ export async function resetpassword(request, response) {
 
 export async function refreshToken(request, response) {
     try {
-        const refreshToken = request.cookies.refreshToken || request?.header?.
+        const refreshToken = request.cookies.refreshToken || request?.headers?.
         authorization?.split(" ")[1]
 
         if(!refreshToken){
@@ -494,6 +500,27 @@ export async function refreshToken(request, response) {
     } catch (error) {
         return response.status(500).json({
             message : error.message || error,
+            error : true,
+            success : false
+        })
+    }
+    
+}
+
+export async function userDetails(request, response) {
+    try {
+        const userId = request.userId
+        const user = await UserModel.findById(userId).select('-password -refresh_token')
+
+        return response.json({
+            message : 'user details',
+            data : user,
+            error : false,
+            success : true
+        })
+    } catch (error) {
+        return response.status(500).json({
+            message : "Hubo un error trayendo la información",
             error : true,
             success : false
         })
