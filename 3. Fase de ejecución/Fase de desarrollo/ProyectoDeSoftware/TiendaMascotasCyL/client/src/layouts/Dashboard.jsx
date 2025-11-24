@@ -7,12 +7,12 @@ const Dashboard = () => {
     <section className='bg-white'>
         <div className='pl-10 mx-auto p-3 grid lg:grid-cols-[250px,1fr]'>
              {/* menu izquierda */}
-            <div className='py-4 sticky top-24 hidden lg:block'>
+            <div className='py-4 sticky top-24 overflow-y-auto hidden lg:block border-r'>
                <UserMenu/>
 
             </div>
             {/**contenido de la derecha */}
-            <div className='bg-white p-4'>
+            <div className='bg-white min-h-[80vh]'>
                 <Outlet/>
             </div>
         </div>
