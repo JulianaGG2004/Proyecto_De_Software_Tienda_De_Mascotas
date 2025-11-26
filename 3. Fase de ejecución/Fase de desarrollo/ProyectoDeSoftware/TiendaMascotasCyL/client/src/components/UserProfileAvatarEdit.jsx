@@ -43,7 +43,7 @@ const UserProfileAvatarEdit = ({close}) => {
     }
   return (
     <div>
-      <section className=' fixed top-0 bottom-0 left-0 right-0 bg-neutral-900
+      <section className='fixed top-0 bottom-0 left-0 right-0 bg-neutral-900
       bg-opacity-60 p-4 flex items-center justify-center z-[100]'>
 
         <div className='bg-white max-w-sm w-full rounded p-4 flex flex-col

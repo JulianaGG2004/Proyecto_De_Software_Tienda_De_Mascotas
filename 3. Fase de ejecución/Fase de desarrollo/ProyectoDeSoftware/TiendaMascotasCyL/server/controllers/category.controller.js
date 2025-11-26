@@ -43,3 +43,47 @@ export const AddCategoryController = async(request, response)=>{
         })
     }
 }
+
+export const getCategoryController = async(request, response)=>{
+    try {
+        const data = await CategoryModel.find()
+
+        return response.json({
+            data : data,
+            error : false,
+            success :true
+        })
+    } catch (error) {
+        return response.status(500).json({
+            message : error.message || error,
+            error : true,
+            success : false
+        })
+    }
+}
+
+export const updateCategoryController = async(request, response)=>{
+    try {
+        const { categoryId, name, image} = request.body
+
+        const update = await CategoryModel.updateOne({
+            _id : categoryId
+        },{
+            name,
+            image
+        })
+
+        return response.json({
+            message : "Categoría actualizada exitosamente",
+            success : true,
+            error : false,
+            data : update
+        })
+    } catch (error) {
+        return response.status(500).json({
+            message : error.message || error,
+            error :true,
+            success : false
+        })
+    }
+}

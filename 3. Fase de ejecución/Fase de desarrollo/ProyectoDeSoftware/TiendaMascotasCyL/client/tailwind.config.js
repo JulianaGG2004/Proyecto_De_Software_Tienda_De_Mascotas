@@ -13,8 +13,10 @@ export default {
         "primary-400" : "#0098AA", //FFC929 in yellow medio
         "primary-500" : "#007c92", //FFC929 in yellow oscuro
         
-        "secondary-200" : "#007E98", //00B050 is green
-        "secondary-100" : "#007C92" //0B1A78 is blue
+        "secondary-500" : "#AD173C", //00B050 is green
+        "secondary-300" : "#F7255B" //0B1A78 is blue
+
+        
       }
     },
   },

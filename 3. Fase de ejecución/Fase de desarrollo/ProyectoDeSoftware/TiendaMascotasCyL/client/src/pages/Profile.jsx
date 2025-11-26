@@ -63,7 +63,7 @@ const Profile = () => {
     }
 
   return (
-    <div>
+    <div className='p-4'>
         {/**Sección para actualizar imagen de perfil */}
         <div className='w-20 h-20 flex items-center justify-center rounded-full overflow-hidden drop-shadow-sm'>
             {
