@@ -12,6 +12,7 @@ import { BiSolidCategory } from "react-icons/bi";
 import { MdCategory, MdPets, MdLogout } from "react-icons/md";
 import { FiPackage } from "react-icons/fi";
 import { FaHouseUser } from "react-icons/fa6";
+import isAdmin from '../utils/isAdmin'
 
 const UserMenu = ({close}) => {
 
@@ -48,7 +49,7 @@ const UserMenu = ({close}) => {
         <div className=''>
             <div className='font-semibold'>Mi cuenta</div>
             <div className='text-sm flex items-center gap-2'>
-                <span className='max-w-52 text-ellipsis line-clamp-1'>{user.name || user.mobile}</span>
+                <span className='max-w-52 text-ellipsis line-clamp-1'>{user.name || user.mobile} <span>{user.role === "ADMIN" ? "(Admin)" : ""}</span></span>
                 <Link onClick={handleClose} to={"/dashboard/profile"} className='hover:text-primary-300'>
                 <FaUserCircle size={15}/>
                 </Link>
@@ -56,11 +57,27 @@ const UserMenu = ({close}) => {
             <Divider/>
 
             <div className='text-sm grid gap-2'>
+                {
+                    isAdmin(user.role) && (
+                        <Link onClick={handleClose} to={"/dashboard/category"} className='flex items-center gap-2 px-2 hover:bg-primary-200 py-1'><BiSolidCategory/>Categorías</Link>
+                    )
+                }
+                {
+                    isAdmin(user.role) && (
+                        <Link onClick={handleClose} to={"/dashboard/subcategory"} className='flex items-center gap-2 px-2 hover:bg-primary-200 py-1'><MdCategory/>Subcategorías</Link>
+                    )
+                }
+                {
+                    isAdmin(user.role) && (
+                        <Link onClick={handleClose} to={"/dashboard/upload-product"} className='flex items-center gap-2 px-2 hover:bg-primary-200 py-1'><MdPets/>Registrar Producto</Link>
+                    )
+                }
+                {
+                    isAdmin(user.role) && (
+                        <Link onClick={handleClose} to={"/dashboard/products"} className='flex items-center gap-2 px-2 hover:bg-primary-200 py-1'><FaRegListAlt/> Listar Productos</Link>
+                    )
+                }
 
-                <Link onClick={handleClose} to={"/dashboard/category"} className='flex items-center gap-2 px-2 hover:bg-primary-200 py-1'><BiSolidCategory/>Categorías</Link>
-                <Link onClick={handleClose} to={"/dashboard/subcategory"} className='flex items-center gap-2 px-2 hover:bg-primary-200 py-1'><MdCategory/>Subcategorías</Link>
-                <Link onClick={handleClose} to={"/dashboard/upload-product"} className='flex items-center gap-2 px-2 hover:bg-primary-200 py-1'><MdPets/>Registrar Producto</Link>
-                <Link onClick={handleClose} to={"/dashboard/products"} className='flex items-center gap-2 px-2 hover:bg-primary-200 py-1'><FaRegListAlt/> Listar Productos</Link>
                 <Link onClick={handleClose} to={"/dashboard/myorders"} className='flex items-center gap-2 px-2 hover:bg-primary-200 py-1'><FiPackage/>Mis pedidos</Link>
                 <Link onClick={handleClose} to={"/dashboard/address"} className='flex items-center gap-2 px-2 hover:bg-primary-200 py-1'><FaHouseUser/>Mis direcciones</Link>
                 <button  onClick={handleLogout} className='text-left flex items-center gap-2 px-2 hover:bg-primary-200 py-1'><MdLogout/>Cerrar Sesión</button>

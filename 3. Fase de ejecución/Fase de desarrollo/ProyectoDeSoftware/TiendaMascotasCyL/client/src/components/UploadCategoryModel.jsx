@@ -119,7 +119,7 @@ const UploadCategoryModel = ({close, fetchData}) => {
 
           <button
             className={`
-            ${data.name && data.image ? "bg-primary-300 hover:bg-primary-300 text-white" : "bg-gray-300  "} 
+            ${data.name && data.image ? "bg-primary-300 hover:bg-primary-500 text-white" : "bg-gray-300  "} 
              py-2 font-semibold rounded-full
             `}>
             Registrar categoría</button>
