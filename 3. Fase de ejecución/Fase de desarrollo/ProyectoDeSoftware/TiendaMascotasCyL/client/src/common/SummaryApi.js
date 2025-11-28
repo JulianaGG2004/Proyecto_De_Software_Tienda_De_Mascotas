@@ -63,7 +63,7 @@ const SummaryApi = {
         method : 'delete'
     },
     createSubCategory : {
-        url: 'api/subcategory/create',
+        url: '/api/subcategory/create',
         method : 'post'
     },
     getSubCategory : {
