@@ -24,7 +24,7 @@ const SubcategoryPage = () => {
     _id : ""
   })
   const [deleteSubCategory,setDeleteSubCategory] = useState({
-      _id : ""
+    _id : ""
   })
   const [openDeleteConfirmBox,setOpenDeleteConfirmBox] = useState(false)
 

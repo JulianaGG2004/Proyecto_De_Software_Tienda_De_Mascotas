@@ -57,7 +57,7 @@ const UploadCategoryModel = ({close, fetchData}) => {
       }
 
       const response = await uploadImage(file)
-        const { data : ImageResponse } = response
+      const { data : ImageResponse } = response
 
         setData((preve)=>{
             return{

@@ -61,7 +61,7 @@ const UploadSubCategoryModel = ({close, fetchData}) => {
                 close()
             }
             if(fetchData){
-                    fetchData()
+                fetchData()
             }
         }
         } catch (error) {
