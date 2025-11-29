@@ -9,6 +9,7 @@ import { IoClose } from "react-icons/io5";
 import SummaryApi from '../common/SummaryApi';
 import Axios from '../utils/Axios';
 import AxiosToastError from '../utils/AxiosToastError';
+import successAlert from '../utils/SuccessAlert';
 
 const UploadProduct = () => {
   const [data,setData]= useState({
@@ -172,7 +173,7 @@ const UploadProduct = () => {
                   type="file"
                   id='productImage'
                   className='hidden'
-                  accept='image'
+                  accept='image/*'
                   onChange={handleUploadImage}
                 />
               </label>
