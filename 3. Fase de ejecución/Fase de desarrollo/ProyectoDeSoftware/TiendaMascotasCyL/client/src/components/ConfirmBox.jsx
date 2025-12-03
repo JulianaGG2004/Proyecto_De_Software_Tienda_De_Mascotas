@@ -11,7 +11,7 @@ const ConfirmBox = ({cancel,confirm,close}) => {
                     <IoClose size={25}/>
                 </button>
             </div>
-            <p className='my-4'>Estas seguro de eliminar permanentemente este regsitro?</p>
+            <p className='my-4'>Estas seguro de eliminar permanentemente este registro?</p>
             <div className='w-fit ml-auto flex items-center gap-3'>
                 <button onClick={cancel} className='px-4 border bg-secondary-300 hover:bg-secondary-500 text-white py-2 rounded-full'>Cancelar</button>
                 <button onClick={confirm} className='px-4 border bg-primary-300 hover:bg-primary-500 text-white font-medium py-2 rounded-full'>Confirmar</button>

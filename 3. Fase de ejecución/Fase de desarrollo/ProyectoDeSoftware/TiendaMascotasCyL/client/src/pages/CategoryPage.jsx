@@ -89,7 +89,7 @@ const CategoryPage = () => {
         )
       }
 
-      <div className='p-4 grid gap-4 grid-cols-[repeat(auto-fill,minmax(160px,1fr))]'>
+      <div className='p-4 bg-slate-100 grid gap-4 grid-cols-[repeat(auto-fill,minmax(160px,1fr))]'>
         {
         categoryData.map((category,index)=>{
           return(

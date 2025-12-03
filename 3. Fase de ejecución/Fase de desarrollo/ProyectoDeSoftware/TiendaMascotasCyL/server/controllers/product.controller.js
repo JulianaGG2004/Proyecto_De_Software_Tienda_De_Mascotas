@@ -93,3 +93,169 @@ export const getProductController = async(request,response)=>{
         })
     }
 }
+
+export const getProductByCategory = async(request,response)=>{
+    try {
+        const { id } = request.body 
+
+        if(!id){
+            return response.status(400).json({
+                message : "Provea el id de la categoría",
+                error : true,
+                success : false
+            })
+        }
+
+        const product = await ProductModel.find({ 
+            category : { $in : id }
+        }).limit(10)
+
+        return response.json({
+            message : "Lista de productos por categoría",
+            data : product,
+            error : false,
+            success : true
+        })
+    } catch (error) {
+        return response.status(500).json({
+            message : error.message || error,
+            error : true,
+            success : false
+        })
+    }
+}
+
+export const getProductByCategoryAndSubCategory  = async(request,response)=>{
+    try {
+        const { categoryId,subCategoryId,page,limit } = request.body
+
+        if(!categoryId || !subCategoryId){
+            return response.status(400).json({
+                message : "Brinde una categoría y subcategoría",
+                error : true,
+                success : false
+            })
+        }
+
+        if(!page){
+            page = 1
+        }
+
+        if(!limit){
+            limit = 10
+        }
+
+        const query = {
+            category : { $in :categoryId  },
+            subCategory : { $in : subCategoryId }
+        }
+
+        const skip = (page - 1) * limit
+
+        const [data,dataCount] = await Promise.all([
+            ProductModel.find(query).sort({createdAt : -1 }).skip(skip).limit(limit),
+            ProductModel.countDocuments(query)
+        ])
+
+        return response.json({
+            message : "Lista de productos",
+            data : data,
+            totalCount : dataCount,
+            page : page,
+            limit : limit,
+            success : true,
+            error : false
+        })
+
+    } catch (error) {
+        return response.status(500).json({
+            message : error.message || error,
+            error : true,
+            success : false
+        })
+    }
+}
+
+export const getProductDetails = async(request,response)=>{
+    try {
+        const { productId } = request.body 
+
+        const product = await ProductModel.findOne({ _id : productId })
+
+
+        return response.json({
+            message : "product details",
+            data : product,
+            error : false,
+            success : true
+        })
+
+    } catch (error) {
+        return response.status(500).json({
+            message : error.message || error,
+            error : true,
+            success : false
+        })
+    }
+}
+
+export const updateProductDetails = async(request,response)=>{
+    try {
+        const { _id } = request.body 
+
+        if(!_id){
+            return response.status(400).json({
+                message : "Provea el _id del producto",
+                error : true,
+                success : false
+            })
+        }
+
+        const updateProduct = await ProductModel.updateOne({ _id : _id },{
+            ...request.body
+        })
+
+        return response.json({
+            message : "Producto actualizado exitosamente",
+            data : updateProduct,
+            error : false,
+            success : true
+        })
+
+    } catch (error) {
+        return response.status(500).json({
+            message : error.message || error,
+            error : true,
+            success : false
+        })
+    }
+}
+
+export const deleteProductDetails = async(request,response)=>{
+    try {
+        const { _id } = request.body 
+
+        if(!_id){
+            return response.status(400).json({
+                message : "Provea un _id ",
+                error : true,
+                success : false
+            })
+        }
+
+        const deleteProduct = await ProductModel.deleteOne({_id : _id })
+
+        return response.json({
+            message : "Producto eliminado exitosamente",
+            error : false,
+            success : true,
+            data : deleteProduct
+        })
+    } catch (error) {
+        return response.status(500).json({
+            message : error.message || error,
+            error : true,
+            success : false
+        })
+    }
+}
