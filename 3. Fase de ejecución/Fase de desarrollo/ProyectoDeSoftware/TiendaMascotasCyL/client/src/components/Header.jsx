@@ -113,7 +113,7 @@ const Header = () => {
                                     {
                                         cartItem[0] ? (
                                             <div>
-                                                <p>{totalQty} Items</p>
+                                                <p>{totalQty} Productos</p>
                                                 <p>{DisplayPriceInPesos(totalPrice)}</p>
                                             </div>
                                         ) : (
