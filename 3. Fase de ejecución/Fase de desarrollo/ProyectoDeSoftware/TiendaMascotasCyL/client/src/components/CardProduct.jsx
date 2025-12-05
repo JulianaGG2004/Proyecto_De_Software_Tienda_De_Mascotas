@@ -2,9 +2,12 @@ import React from 'react'
 import { DisplayPriceInPesos } from '../utils/DisplayPriceInPesos'
 import { Link } from 'react-router-dom'
 import { valideURLConvert } from '../utils/validateURLConvert'
+import { useState } from 'react'
+import AddToCartButton from './AddToCartButton'
 
 const CardProduct = ({data}) => {
 const url = `/product/${valideURLConvert(data.name)}-${data._id}`
+const [loading,setLoading] = useState(false)
 
   return (
     <Link to={url} className='border lg:p-2 grid gap-3 w-40 lg:w-52 rounded-xl bg-white shadow-sm shrink-0  '>
@@ -17,13 +20,6 @@ const url = `/product/${valideURLConvert(data.name)}-${data._id}`
       <div className='flex items-center gap-1'>
         <div className='rounded text-xs w-fit p-[1px] px-2 text-green-600 bg-green-50'>
               10 min 
-        </div>
-        <div>
-            {
-              Boolean(data.discount) && (
-                <p className='text-green-600 bg-green-100 px-2 w-fit text-xs rounded-full'>{data.discount}% discount</p>
-              )
-            }
         </div>
       </div>
       <div className='px-2 lg:px-0 font-medium text-ellipsis text-sm lg:text-base line-clamp-2 truncate'>
@@ -38,7 +34,14 @@ const url = `/product/${valideURLConvert(data.name)}-${data._id}`
               {DisplayPriceInPesos(data.price)} 
           </div>
         </div>
-        <div className='p-3 bg-blue-50 rounded w-20 '>
+        <div className='p-2 rounded w-20 '>
+          {
+            data.status == false ? (
+              <p className='text-secondary-300 text-sm text-center' >No disponible</p>
+            ) : (
+              <AddToCartButton data={data}/>
+            )
+          }
         </div>
       </div>
 

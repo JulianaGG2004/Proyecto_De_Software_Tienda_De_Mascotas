@@ -19,8 +19,8 @@ const UploadProduct = () => {
     subCategory : [],
     unit : "",
     stock : "",
+    status : "",
     price : "",
-    discount : "",
     description : ""
   })
 
@@ -109,8 +109,8 @@ const UploadProduct = () => {
             subCategory : [],
             unit : "",
             stock : "",
+            status : "",
             price : "",
-            discount : "",
             description : ""
           })
 
@@ -314,6 +314,28 @@ const UploadProduct = () => {
             />
           </div>
           <div className='grid gap-1'>
+              <label htmlFor='status' className='font-medium'>Estado del Producto:</label>
+
+              <select
+                  id='status'
+                  name='status'
+                  value={data.status}
+                  onChange={(e) =>
+                  handleChange({
+                      target: {
+                      name: 'status',
+                      value: e.target.value === 'true'   // convertir a booleano
+                      }
+                  })
+                  }
+                  required
+                  className='bg-slate-100 p-2 border rounded focus-within:border-primary-400 outline-none'
+              >
+                  <option value="true">Disponible</option>
+                  <option value="false">No disponible</option>
+              </select>
+          </div>
+          <div className='grid gap-1'>
             <label htmlFor='price' className='font-medium'>Precio:</label>
             <input
                 id='price'
@@ -326,20 +348,6 @@ const UploadProduct = () => {
                 className='bg-slate-100 p-2 border rounded focus-within:border-primary-400 outline-none'
             />
           </div>
-          <div className='grid gap-1'>
-            <label htmlFor='discount' className='font-medium'>Descuento:</label>
-            <input
-                id='discount'
-                type="number"
-                placeholder='Ingresar el descuento del producto'
-                name='discount'
-                value={data.discount}
-                onChange={handleChange}
-                required
-                className='bg-slate-100 p-2 border rounded focus-within:border-primary-400 outline-none'
-            />
-          </div>
-
           <button className='py-3 font-semibold bg-primary-300 hover:bg-primary-500 text-white rounded-full'>
             Añadir Producto
           </button>

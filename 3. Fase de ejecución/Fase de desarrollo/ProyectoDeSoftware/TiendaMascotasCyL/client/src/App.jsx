@@ -10,6 +10,8 @@ import { setAllCategory,setAllSubCategory,setLoadingCategory } from './store/pro
 import { useDispatch } from 'react-redux';
 import Axios from './utils/Axios';
 import SummaryApi from './common/SummaryApi';
+import GlobalProvider from './provider/GlobalProvider';
+import CartMobileLink from './components/CartMobile';
 
 function App() {
   const dispatch = useDispatch()
@@ -66,14 +68,19 @@ function App() {
 
 
   return (
-    <>
+  <GlobalProvider>
     <Header/>
-    <main className='min-h-[80vh]'>
+    <main className='bg-white min-h-[80vh]'>
       <Outlet/>
     </main>
     <Footer/>
     <Toaster/>
-  </>
+     {
+      location.pathname !== '/checkout' && (
+        <CartMobileLink/>
+      )
+    }
+  </GlobalProvider>
    
   )
 }

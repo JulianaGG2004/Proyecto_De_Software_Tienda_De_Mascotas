@@ -28,12 +28,12 @@ const productSchema = new mongoose.Schema({
         type : Number,
         default : null
     },
+    status : {
+        type : Boolean,
+        default : true
+    },
     price : {
         type: Number,
-        default : null
-    },
-    discount : {
-        type : Number,
         default : null
     },
     description : {

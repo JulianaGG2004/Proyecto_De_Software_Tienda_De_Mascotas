@@ -20,8 +20,8 @@ const EditProductAdmin = ({close,data : propsData, fetchProductData}) => {
     subCategory: propsData.subCategory,
     unit: propsData.unit,
     stock: propsData.stock,
+    status: propsData.status,
     price: propsData.price,
-    discount: propsData.discount,
     description: propsData.description,
   })
 
@@ -115,7 +115,6 @@ const EditProductAdmin = ({close,data : propsData, fetchProductData}) => {
             unit : "",
             stock : "",
             price : "",
-            discount : "",
             description : ""
           })
 
@@ -326,6 +325,28 @@ const EditProductAdmin = ({close,data : propsData, fetchProductData}) => {
                     />
                 </div>
                 <div className='grid gap-1'>
+                    <label htmlFor='status' className='font-medium'>Estado del Producto:</label>
+
+                    <select
+                        id='status'
+                        name='status'
+                        value={data.status}
+                        onChange={(e) =>
+                        handleChange({
+                            target: {
+                            name: 'status',
+                            value: e.target.value === 'true'   // convertir a booleano
+                            }
+                        })
+                        }
+                        required
+                        className='bg-slate-100 p-2 border rounded focus-within:border-primary-400 outline-none'
+                    >
+                        <option value="true">Disponible</option>
+                        <option value="false">No disponible</option>
+                    </select>
+                </div>
+                <div className='grid gap-1'>
                     <label htmlFor='price' className='font-medium'>Precio:</label>
                     <input
                         id='price'
@@ -333,19 +354,6 @@ const EditProductAdmin = ({close,data : propsData, fetchProductData}) => {
                         placeholder='Ingresar el precio del producto'
                         name='price'
                         value={data.price}
-                        onChange={handleChange}
-                        required
-                        className='bg-slate-100 p-2 border rounded focus-within:border-primary-400 outline-none'
-                    />
-                </div>
-                <div className='grid gap-1'>
-                    <label htmlFor='discount' className='font-medium'>Descuento:</label>
-                    <input
-                        id='discount'
-                        type="number"
-                        placeholder='Ingresar el descuento del producto'
-                        name='discount'
-                        value={data.discount}
                         onChange={handleChange}
                         required
                         className='bg-slate-100 p-2 border rounded focus-within:border-primary-400 outline-none'

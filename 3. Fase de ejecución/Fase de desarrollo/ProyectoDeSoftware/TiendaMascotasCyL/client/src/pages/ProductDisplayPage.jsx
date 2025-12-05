@@ -6,6 +6,7 @@ import AxiosToastError from '../utils/AxiosToastError'
 import { FaAngleRight,FaAngleLeft } from "react-icons/fa6";
 import { DisplayPriceInPesos } from '../utils/DisplayPriceInPesos.js'
 import Divider from '../components/Divider'
+import AddToCartButton from '../components/AddToCartButton.jsx'
 
 const ProductDisplayPage = () => {
   const params = useParams()
@@ -110,10 +111,13 @@ const ProductDisplayPage = () => {
               </div>
           </div>
             {
-              data.stock === 0 ? (
-                <p className='text-lg text-secondary-300'>No Disponible</p>
+              data.status === false ? (
+                <p className='text-lg text-secondary-300 my-2'>No Disponible</p>
               ) : (
-                <button className='my-4 px-4 py-1 bg-primary-300 hover:bg-primary-500 text-white rounded'>Añadir producto</button>
+                //<button className='my-4 px-4 py-1 bg-primary-300 hover:bg-primary-500 text-white rounded'>Añadir producto</button>
+                <div className='my-4'>
+                  <AddToCartButton data={data}/>
+                </div>
               )
             }
           <Divider/>

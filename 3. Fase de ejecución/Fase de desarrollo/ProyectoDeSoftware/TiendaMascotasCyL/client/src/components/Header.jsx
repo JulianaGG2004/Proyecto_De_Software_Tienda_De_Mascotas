@@ -8,6 +8,8 @@ import { BsCart4 } from "react-icons/bs";
 import { useSelector } from 'react-redux';
 import { GoTriangleDown, GoTriangleUp  } from "react-icons/go";
 import UserMenu from './UserMenu';
+import { DisplayPriceInPesos } from '../utils/DisplayPriceInPesos';
+import { useGlobalContext } from '../provider/GlobalProvider';
 
 const Header = () => {
     const [ isMobile ] = useMobile()
@@ -16,6 +18,8 @@ const Header = () => {
     const navigate = useNavigate()
     const user = useSelector((state)=> state?.user)
     const [openUserMenu,setOpenUserMenu] = useState(false)
+    const cartItem = useSelector(state => state.cartItem.cart)
+    const { totalPrice, totalQty} = useGlobalContext()
 
     const redirectToLoginPage = ()=>{
         navigate("/login")
@@ -105,8 +109,17 @@ const Header = () => {
                                 <div className='animate-bounce'>
                                     <BsCart4 size={26}/>
                                 </div>
-                                <div className='font-semibold'>
-                                    <p>Mi Carrito</p>
+                                <div className='font-semibold text-sm'>
+                                    {
+                                        cartItem[0] ? (
+                                            <div>
+                                                <p>{totalQty} Items</p>
+                                                <p>{DisplayPriceInPesos(totalPrice)}</p>
+                                            </div>
+                                        ) : (
+                                            <p>Mi carrito</p>
+                                        )
+                                    }
                                 </div>
                             </button>
                         </div>

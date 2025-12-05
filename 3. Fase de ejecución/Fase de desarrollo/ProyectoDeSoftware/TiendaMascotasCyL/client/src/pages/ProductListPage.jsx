@@ -72,27 +72,39 @@ const ProductListPage = () => {
     <div className='sticky top-24 mx-auto grid grid-cols-[90px,1fr] md:grid-cols-[200px,1fr] lg:grid-cols-[280px,1fr]'>
         {/**Sub category */}
         <div className=' min-h-[88vh] max-h-[88vh] overflow-y-scroll  grid gap-1 shadow-md scrollbarCustom bg-white py-2'>
-           {
+           <div>
+            {
             DisplaySubCatory.map((s,index)=>{
                 const link =`/${valideURLConvert(s?.category[0]?.name)}-${s?.category[0]?._id}/${valideURLConvert(s.name)}-${s._id}`
                 return(
-                    <Link to={link} className={`w-full lg:flex items-center lg:w-full lg:h-16 box-border lg:gap-4 border-b 
-                    hover:bg-primary-300 cursor-pointer
-                    ${subCategoryId === s._id ? "bg-primary-200" : ""}
-                    `}
-                    >
-                        <div className='w-fit max-w-28 mx-auto lg:mx-0 bg-white rounded box-border'>
+                    <Link
+                        to={link}
+                        className={`
+                            w-full 
+                            flex flex-col lg:flex-row 
+                            items-start lg:items-center 
+                            gap-1 lg:gap-4 
+                            px-2 py-2 
+                            border-b hover:bg-primary-300 cursor-pointer
+                            ${subCategoryId === s._id ? "bg-primary-200" : ""}
+                        `}
+                        >
+                        <div className="w-fit mx-auto lg:mx-0 bg-white rounded">
                             <img
-                                src ={s.image}
-                                alt='subCategory'
-                                className='w-14 lg:h-14 lg:w-12 h-full object-scale-down'
+                            src={s.image}
+                            alt="subCategory"
+                            className="w-12 h-12 object-scale-down"
                             />
                         </div>
-                        <p className='lg:mt-0 text-xs text-center lg:text-left lg:text-base'>{s.name}</p>
-                    </Link>
+
+                        <p className="text-xs text-center lg:text-left lg:text-base w-full">
+                            {s.name}
+                        </p>
+                        </Link>
                 )
             })
            }
+           </div>
         </div>
         {/**Producto */}
         <div className=''>
