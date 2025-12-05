@@ -10,6 +10,7 @@ import { GoTriangleDown, GoTriangleUp  } from "react-icons/go";
 import UserMenu from './UserMenu';
 import { DisplayPriceInPesos } from '../utils/DisplayPriceInPesos';
 import { useGlobalContext } from '../provider/GlobalProvider';
+import DisplayCartItem from './DisplayCartItem';
 
 const Header = () => {
     const [ isMobile ] = useMobile()
@@ -20,6 +21,7 @@ const Header = () => {
     const [openUserMenu,setOpenUserMenu] = useState(false)
     const cartItem = useSelector(state => state.cartItem.cart)
     const { totalPrice, totalQty} = useGlobalContext()
+    const [openCartSection,setOpenCartSection] = useState(false)
 
     const redirectToLoginPage = ()=>{
         navigate("/login")
@@ -104,7 +106,7 @@ const Header = () => {
                             }
                             
                             
-                            <button className='flex items-center gap-2 hover:bg-primary-500 px-3 py-1 rounded-2xl border border-white text-white'>
+                            <button onClick={()=>setOpenCartSection(true)} className='flex items-center gap-2 hover:bg-primary-500 px-3 py-1 rounded-2xl border border-white text-white'>
                                 {/**  agregar a carrito icono**/}
                                 <div className='animate-bounce'>
                                     <BsCart4 size={26}/>
@@ -130,7 +132,12 @@ const Header = () => {
         <div className='container mx-auto px-2 lg:hidden'>
             <Search/>
         </div>
-        </header>
+        {
+            openCartSection && (
+                <DisplayCartItem close={()=>setOpenCartSection(false)}/>
+            )
+        }
+    </header>
   )
 }
 
