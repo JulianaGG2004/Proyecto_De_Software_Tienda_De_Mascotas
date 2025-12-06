@@ -1,16 +1,30 @@
 import React from 'react'
 import { IoClose } from 'react-icons/io5'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useGlobalContext } from '../provider/GlobalProvider'
 import { DisplayPriceInPesos } from '../utils/DisplayPriceInPesos'
 import { FaCaretRight } from "react-icons/fa";
 import { useSelector } from 'react-redux'
 import AddToCartButton from './AddToCartButton'
 import imageEmpty from '../assets/empty_card-Photoroom.png'
+import toast from 'react-hot-toast'
 
 const DisplayCartItem = ({close}) => {
     const { totalPrice ,totalQty} = useGlobalContext()
     const cartItem  = useSelector(state => state.cartItem.cart)
+    const user = useSelector(state => state.user)
+    const navigate = useNavigate()
+
+    const redirectToCheckoutPage = ()=>{
+        if(user?._id){
+            navigate("/checkout")
+            if(close){
+                close()
+            }
+            return
+        }
+        toast("Por favor Inicia Sesión")
+    }
   return (
     <section className='bg-neutral-900 fixed top-0 bottom-0 right-0 left-0 bg-opacity-70 z-50 '>
         <div className='bg-white w-full max-w-sm max-h-screen ml-auto min-h-[75vh]'>
@@ -94,8 +108,8 @@ const DisplayCartItem = ({close}) => {
                 cartItem[0] && (
                 <div className='p-2'>
                     <div className='bg-primary-300 text-neutral-100 px-4 font-bold text-base py-4 static bottom-3 rounded flex items-center gap-4 justify-between'>
-                        {DisplayPriceInPesos(totalPrice)}
-                        <button className='flex items-center gap-1'>
+                        <div>{DisplayPriceInPesos(totalPrice)}</div>               
+                        <button onClick={redirectToCheckoutPage} className='flex items-center gap-1'>
                         Proceder con el pago
                         <span><FaCaretRight/></span>
                     </button>

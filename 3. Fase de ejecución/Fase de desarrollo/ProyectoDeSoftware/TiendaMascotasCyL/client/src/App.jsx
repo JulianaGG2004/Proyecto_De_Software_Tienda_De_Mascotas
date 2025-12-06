@@ -70,7 +70,7 @@ function App() {
   return (
   <GlobalProvider>
     <Header/>
-    <main className='bg-white min-h-[80vh]'>
+    <main className='bg-slate-100 min-h-[80vh]'>
       <Outlet/>
     </main>
     <Footer/>
