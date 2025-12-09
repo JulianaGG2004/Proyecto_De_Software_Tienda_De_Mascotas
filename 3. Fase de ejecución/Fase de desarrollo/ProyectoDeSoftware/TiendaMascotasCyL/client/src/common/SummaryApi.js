@@ -110,7 +110,7 @@ const SummaryApi = {
         url : '/api/product/search-product',
         method : 'post'
     },
-    addToCard : {
+    addToCart : {
         url : '/api/cart/create',
         method : 'post'
     },
@@ -139,8 +139,24 @@ const SummaryApi = {
         method : 'put'
     },
     disableAddress : {
-    url : '/api/address/disable',
-    method : 'delete'
+        url : '/api/address/disable',
+        method : 'delete'
+    },
+    CashOnDeliveryOrder : {
+        url : "/api/order/cash-on-delivery",
+        method : 'post'
+    },
+    payment_url : {
+        url : "/api/order/checkout",
+        method : 'post'
+    },
+    getOrderItems : {
+        url : '/api/order/order-list',
+        method : 'get'
+    },
+    update_order_status :{
+        url : '/api/order/status',
+        method : 'put'
     }
 
 }

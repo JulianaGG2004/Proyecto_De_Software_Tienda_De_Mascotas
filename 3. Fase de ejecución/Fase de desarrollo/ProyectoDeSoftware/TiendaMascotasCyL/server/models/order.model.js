@@ -10,14 +10,35 @@ const orderSchema = new mongoose.Schema({
         required : [true, "Ingrese el codigo del pedido"],
         unique : true
     },
-    productId : {
-        type: mongoose.Schema.ObjectId,
-        ref : "product"
+    status: {
+        type: String,
+        enum: [
+            "Pendiente",
+            "Procesando",
+            "Enviado",
+            "En tránsito",
+            "Entregado"
+        ],
+        default: "Pendiente"
     },
-    product_details : {
-        name : String,
-        image : Array
-    },
+    products: [
+        {
+            productId: {
+                type: mongoose.Schema.ObjectId,
+                ref: "product",
+                required: true
+            },
+            quantity: {
+                type: Number,
+                required: true,
+                default: 1
+            },
+            product_details: {
+                name: String,
+                image: Array
+            }
+        }
+    ],
     paymentId : {
         type : String,
         default : ""
@@ -28,7 +49,8 @@ const orderSchema = new mongoose.Schema({
     },
     delivery_address : {
         type : mongoose.Schema.ObjectId,
-        ref : 'address'
+        ref : 'address',
+        required : [true, "Debe seleccionar una dirección"]
     },
     subTotalAmt : {
         type : Number,

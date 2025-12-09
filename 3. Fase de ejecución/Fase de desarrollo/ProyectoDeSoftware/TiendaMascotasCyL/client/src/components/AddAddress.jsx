@@ -58,6 +58,7 @@ const AddAddress = ({close}) => {
                         id='city' 
                         className='border bg-slate-100 p-2 rounded'
                         {...register("city",{required : true})}
+                        placeholder='Ingrese la ciudad del domicilio'
                     />
                 </div>
                 <div className='grid gap-1'>
@@ -67,6 +68,7 @@ const AddAddress = ({close}) => {
                         id='department' 
                         className='border bg-slate-100 p-2 rounded'
                         {...register("department",{required : true})}
+                        placeholder='Ingrese el departamento'
                     />
                 </div>
                 <div className='grid gap-1'>
@@ -76,6 +78,7 @@ const AddAddress = ({close}) => {
                         id='address_detail' 
                         className='border bg-slate-100 p-2 rounded'
                         {...register("address_detail",{required : true})}
+                        placeholder='Casa,Apartamento,Edificio...'
                     />
                 </div>
                 <div className='grid gap-1'>
@@ -85,6 +88,7 @@ const AddAddress = ({close}) => {
                         id='neighborhood' 
                         className='border bg-slate-100 p-2 rounded'
                         {...register("neighborhood",{required : true})}
+                        placeholder='Ingrese el barrio del domicilio'
                     />
                 </div>
                 <div className='grid gap-1'>
@@ -94,6 +98,7 @@ const AddAddress = ({close}) => {
                         id='additional_information' 
                         className='border bg-slate-100 p-2 rounded'
                         {...register("additional_information",{required : true})}
+                        placeholder='Ingrese informacion adicional sobre la dirección'
                     />
                 </div>
                 <div className='grid gap-1'>
@@ -103,6 +108,7 @@ const AddAddress = ({close}) => {
                         id='mobile' 
                         className='border bg-slate-100 p-2 rounded'
                         {...register("mobile",{required : true})}
+                        placeholder='Ingrese el telefono de contacto'
                     />
                 </div>
 

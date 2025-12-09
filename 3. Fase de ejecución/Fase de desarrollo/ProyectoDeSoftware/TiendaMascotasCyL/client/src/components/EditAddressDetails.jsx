@@ -67,7 +67,7 @@ const EditAddressDetails = ({close, data}) => {
                     <input
                         type='text'
                         id='city' 
-                        className='border bg-slate-100 p-2 rounded'
+                        className='focus-within:border-primary-400 border bg-slate-100 p-2 rounded outline-none'
                         {...register("city",{required : true})}
                     />
                 </div>
@@ -76,7 +76,7 @@ const EditAddressDetails = ({close, data}) => {
                     <input
                         type='text'
                         id='department' 
-                        className='border bg-slate-100 p-2 rounded'
+                        className='focus-within:border-primary-400 border bg-slate-100 p-2 rounded outline-none'
                         {...register("department",{required : true})}
                     />
                 </div>
@@ -85,7 +85,7 @@ const EditAddressDetails = ({close, data}) => {
                     <input
                         type='text'
                         id='address_detail' 
-                        className='border bg-slate-100 p-2 rounded'
+                        className='focus-within:border-primary-400 border bg-slate-100 p-2 rounded outline-none'
                         {...register("address_detail",{required : true})}
                     />
                 </div>
@@ -94,7 +94,7 @@ const EditAddressDetails = ({close, data}) => {
                     <input
                         type='text'
                         id='neighborhood' 
-                        className='border bg-slate-100 p-2 rounded'
+                        className='focus-within:border-primary-400 border bg-slate-100 p-2 rounded outline-none'
                         {...register("neighborhood",{required : true})}
                     />
                 </div>
@@ -103,7 +103,7 @@ const EditAddressDetails = ({close, data}) => {
                     <input
                         type='text'
                         id='additional_information' 
-                        className='border bg-slate-100 p-2 rounded'
+                        className='focus-within:border-primary-400 border bg-slate-100 p-2 rounded outline-none'
                         {...register("additional_information",{required : true})}
                     />
                 </div>
@@ -112,7 +112,7 @@ const EditAddressDetails = ({close, data}) => {
                     <input
                         type='text'
                         id='mobile' 
-                        className='border bg-slate-100 p-2 rounded'
+                        className='focus-within:border-primary-400 border bg-slate-100 p-2 rounded outline-none'
                         {...register("mobile",{required : true})}
                     />
                 </div>
