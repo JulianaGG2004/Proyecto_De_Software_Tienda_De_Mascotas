@@ -90,14 +90,14 @@ export async function verifyEmailController(request,response) {
 
         return response.json({
             message : "Se ha verificado el correo",
-            error : true,
-            success : false
+            error : false,
+            success : true
         })
     } catch (error) {
         return response.status(500).json({
             message : error.message || error,
             error : true,
-            success : true
+            success : false
         })
     }
     
@@ -235,7 +235,6 @@ export async function uploadAvatar(request,response) {
             }
         })
 
-        console.log("upload" , upload)
     } catch (error) {
         return response.status(500).json({
             message: error.message || error,
@@ -371,7 +370,7 @@ export async function verifyForgotPasswordOtp(request, response) {
             return response.status(400).json({
                 message : "OTP Invalido",
                 error : true,
-                success : true
+                success : false
             })
         }
 

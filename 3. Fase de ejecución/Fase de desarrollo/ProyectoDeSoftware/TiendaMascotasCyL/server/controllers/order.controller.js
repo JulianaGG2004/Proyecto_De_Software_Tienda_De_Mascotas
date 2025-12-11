@@ -93,7 +93,7 @@ export async function paymentController(request,response){
 
         const session = await Stripe.checkout.sessions.create(params)
 
-        return response.status(200).json(session)
+        return response.status(200).json({ url: session.url })
 
     } catch (error) {
         return response.status(500).json({
@@ -123,19 +123,33 @@ const getOrderProductItems = async({ lineItems }) => {
   return products;
 }
 
-export async function webhookStripe(request,response){
-  const event = request.body;
+export async function webhookStripe(request, response) {
+  const sig = request.headers['stripe-signature'];
+
+  let event;
+
+  try {
+
+    event = Stripe.webhooks.constructEvent(
+      request.body,
+      sig,
+      process.env.STRIPE_ENPOINT_WEBHOOK_SECRET_KEY
+    );
+  } catch (err) {
+    console.error(' Webhook signature verification failed:', err.message);
+    return response.status(400).send(`Webhook Error: ${err.message}`);
+  }
 
   switch (event.type) {
     case 'checkout.session.completed':
       const session = event.data.object;
-      const lineItems = await Stripe.checkout.sessions.listLineItems(session.id);
 
+      const lineItems = await Stripe.checkout.sessions.listLineItems(session.id);
       const products = await getOrderProductItems({ lineItems });
 
       const orderId = `ORD-${new mongoose.Types.ObjectId()}`;
 
-      const order = await OrderModel.create({
+      await OrderModel.create({
         userId: session.metadata.userId,
         orderId,
         products,
@@ -157,6 +171,7 @@ export async function webhookStripe(request,response){
 
   response.json({ received: true });
 }
+
 export async function getOrderDetailsController(req, res) {
     try {
         const userId = req.userId;
