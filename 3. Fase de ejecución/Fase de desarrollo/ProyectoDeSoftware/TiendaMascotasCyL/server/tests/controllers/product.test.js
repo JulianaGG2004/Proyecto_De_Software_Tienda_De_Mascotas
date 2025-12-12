@@ -34,7 +34,6 @@ describe("Product Controller", () => {
 //create
   test("Debe crear un producto exitosamente", async () => {
 
-    // Mock del return del save
     ProductModel.prototype.save.mockResolvedValue({
       _id: "mockProductId",
       name: "Producto Test",
@@ -366,7 +365,7 @@ test("Debe retornar 400 si no se envía _id", async () => {
   const res = await request(app)
     .put("/api/product/update-product-details")
     .set("Authorization", `Bearer ${token}`)
-    .send({}); // no _id
+    .send({});
 
   expect(res.status).toBe(400);
   expect(res.body.success).toBe(false);

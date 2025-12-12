@@ -175,20 +175,16 @@ export async function webhookStripe(request, response) {
 export async function getOrderDetailsController(req, res) {
     try {
         const userId = req.userId;
-
-        // Buscamos al usuario para saber su rol
         const user = await UserModel.findById(userId);
 
         let orderlist = [];
 
-        // 🔹 Si es ADMIN → devuelve todos los pedidos
         if (user.role === "ADMIN") {
             orderlist = await OrderModel.find()
                 .sort({ createdAt: -1 })
                 .populate("delivery_address")
                 .populate("userId", "name email");
         } 
-        // 🔹 Si es USER → solo sus pedidos
         else {
             orderlist = await OrderModel.find({ userId })
                 .sort({ createdAt: -1 })
@@ -215,7 +211,6 @@ export async function updateOrderStatusController(req, res) {
     try {
         const { orderId, status } = req.body;
 
-        // Validar estados permitidos
         const allowedStatus = ["Pendiente", "Procesando", "Enviado", "En tránsito", "Entregado"];
         if (!allowedStatus.includes(status)) {
             return res.status(400).json({
@@ -233,12 +228,14 @@ export async function updateOrderStatusController(req, res) {
         return res.json({
             message: "Estado actualizado",
             success: true,
+            error : false,
             data: updated
         });
 
     } catch (error) {
         return res.status(500).json({
             message: error.message || error,
+            error : true,
             success: false
         });
     }
