@@ -28,21 +28,17 @@ const productSchema = new mongoose.Schema({
         type : Number,
         default : null
     },
+    status : {
+        type : Boolean,
+        default : true
+    },
     price : {
         type: Number,
-        default : null
-    },
-    discount : {
-        type : Number,
         default : null
     },
     description : {
         type: String,
         default : ""
-    },
-    more_details : {
-        type : Object,
-        default : {}
     },
     publish : {
         type : Boolean,
@@ -51,6 +47,13 @@ const productSchema = new mongoose.Schema({
 },{
     timestamps : true
 })
+
+//Crear un texto con index
+
+productSchema.index(
+  { name: "text", description: "text" },
+  { weights: { name: 10, description: 5 } }
+);
 
 const ProductModel = mongoose.model('product', productSchema)
 

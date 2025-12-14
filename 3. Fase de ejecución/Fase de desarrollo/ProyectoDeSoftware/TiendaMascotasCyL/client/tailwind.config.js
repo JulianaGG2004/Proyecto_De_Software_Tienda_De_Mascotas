@@ -7,11 +7,16 @@ export default {
   theme: {
     extend: {
       colors : {
-        "primary-200" : "#A8E1EA",//no exist FFBG00
-        "primary-100" : "#007c92", //FFC929 in yellow
-        "primary-500" : "#0098AA", //FFC929 in yellow
-        "secondary-200" : "#007E98", //00B050 is green
-        "secondary-100" : "#007C92" //0B1A78 is blue
+        "primary-100" : "#F5F5F5",
+        "primary-200" : "#A8E1EA",
+        "primary-300" : "#00AFC4",
+        "primary-400" : "#0098AA",
+        "primary-500" : "#007c92",
+        "secondary-200" : "#FDBACB",
+        "secondary-500" : "#AD173C",
+        "secondary-300" : "#F7255B"
+
+        
       }
     },
   },
