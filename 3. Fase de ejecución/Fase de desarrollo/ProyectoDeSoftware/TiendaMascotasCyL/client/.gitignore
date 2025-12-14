@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Coverage directory used by tools like istanbul
+coverage
+*.lcov
+
+#manual changes
+
+client/node_modules
+server/node_modules
+.env
+.client/.env
+.server/.env
